@@ -12,8 +12,9 @@ def inicio(request):
         form_data = form.cleaned_data
         email = form_data.get("email")
         nombre = form_data.get("nombre")
-        obj = Registrados.objects.create(email=email, nombre =nombre)
+        obj = Registrados.objects.create(email = email, nombre = nombre)
     context = {
         "el_form": form,
     }
-    return render(request, "index.html",context)
+    return render(request, "index.html", context)
+ 
