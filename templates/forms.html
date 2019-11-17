@@ -13,7 +13,7 @@
     <br />
     {% if form %}
     <form method="post" action="">
-      {% csrf_token %} {{el_form.as_p}}
+      {% csrf_token %} {{form.as_p}}
       <input type="submit" value="Registrame" />
     </form>
     {% endif %}
