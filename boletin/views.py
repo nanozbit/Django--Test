@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.core.mail import send_mail
+from django.conf import settings
 from django.shortcuts import render
 from .forms import RegModelForm, ContactForm
 from .models import Registrados
-# Create your views here.
+# Create your views here
 
 def inicio(request):
     titulo = "hola"
@@ -38,10 +39,19 @@ def inicio(request):
 def contact(request):
     form = ContactForm(request.POST or None)
     if form.is_valid():
-        email = form.cleaned_data.get("email")
-        mensaje = form.cleaned_data.get("mensaje")
-        nombre = form.cleaned_data.get("nombre")
-        print email, mensaje, nombre
+        form_email = form.cleaned_data.get("email")
+        form_mensaje = form.cleaned_data.get("mensaje")
+        form_nombre = form.cleaned_data.get("nombre")
+        email_from = settings.Email_Host
+        asunto = "Form contacto"
+        email_to = [email_from, "otromail@gmail.com"]
+        email_mensaje = " Hola como estas amiguito "
+
+        send_mail(asunto,
+        email_mensaje,
+        email_from,
+        email_to,
+        fail_silently=False)
         #for key,value in form.cleaned_data.iteritems()
     context = {
         "form": form,
